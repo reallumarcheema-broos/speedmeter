@@ -1,0 +1,23 @@
+{
+  "name": "speedmeter",
+  "version": "1.0.0",
+  "description": "SpeedMeter - a fast, private internet speed test you can self-host.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "speedtest",
+    "bandwidth",
+    "latency",
+    "network"
+  ],
+  "license": "MIT",
+  "private": true
+}

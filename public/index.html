@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SpeedMeter — Test Your Internet Speed</title>
+<meta name="description" content="SpeedMeter measures your internet download speed, upload speed, ping and jitter right in your browser. No apps, no tracking.">
+<meta name="color-scheme" content="dark light">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to speed test</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 27a11 11 0 1 1 11-11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M16 16l7-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="16" cy="16" r="2.5" fill="currentColor"/>
+      </svg>
+      <span>Speed<strong>Meter</strong></span>
+    </a>
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch colour theme">
+        <span aria-hidden="true">◐</span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+
+  <section class="hero">
+    <h1>How fast is your internet?</h1>
+    <p class="hero-sub">Measure download, upload, ping and jitter in about 30 seconds. Runs entirely between your browser and this server — nothing is stored.</p>
+  </section>
+
+  <section class="tester" aria-label="Speed test">
+    <div class="gauge-area">
+      <svg class="gauge" viewBox="0 0 320 196" role="img" aria-labelledby="gaugeTitle">
+        <title id="gaugeTitle">Live speed gauge</title>
+        <defs>
+          <linearGradient id="arcGradient" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="var(--accent-2)"/>
+            <stop offset="100%" stop-color="var(--accent)"/>
+          </linearGradient>
+        </defs>
+        <path class="gauge-track" d="M 40 176 A 120 120 0 1 1 280 176"/>
+        <path id="gaugeFill" class="gauge-fill" d="M 40 176 A 120 120 0 1 1 280 176"/>
+        <g id="gaugeTicks" class="gauge-ticks"></g>
+        <g id="gaugeMarker" class="gauge-marker">
+          <circle cx="160" cy="56" r="9"/>
+        </g>
+      </svg>
+
+      <div class="gauge-readout">
+        <div id="phaseLabel" class="phase-label">Ready</div>
+        <div class="reading">
+          <span id="liveValue" class="reading-value">0.00</span>
+          <span class="reading-unit">Mbps</span>
+        </div>
+      </div>
+    </div>
+
+    <button id="startBtn" class="start-btn" type="button">
+      <span class="start-btn-text">Start test</span>
+    </button>
+
+    <p id="statusLine" class="status-line" role="status" aria-live="polite">Press start when you're ready.</p>
+
+    <div class="results" role="group" aria-label="Test results">
+      <div class="result-card" data-metric="download">
+        <div class="result-head">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12m0 0l-5-5m5 5l5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Download</span>
+        </div>
+        <div class="result-value"><span id="downloadValue">—</span><small>Mbps</small></div>
+      </div>
+
+      <div class="result-card" data-metric="upload">
+        <div class="result-head">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V8m0 0l-5 5m5-5l5 5M5 4h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Upload</span>
+        </div>
+        <div class="result-value"><span id="uploadValue">—</span><small>Mbps</small></div>
+      </div>
+
+      <div class="result-card" data-metric="ping">
+        <div class="result-head">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3 7 4-14 3 7h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Ping</span>
+        </div>
+        <div class="result-value"><span id="pingValue">—</span><small>ms</small></div>
+      </div>
+
+      <div class="result-card" data-metric="jitter">
+        <div class="result-head">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16l4-8 4 6 3-9 4 11 3-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Jitter</span>
+        </div>
+        <div class="result-value"><span id="jitterValue">—</span><small>ms</small></div>
+      </div>
+    </div>
+
+    <div id="verdict" class="verdict" hidden></div>
+
+    <div id="connectionMeta" class="connection-meta">
+      <span class="meta-item">Server: <strong id="metaServer">—</strong></span>
+      <span class="meta-item">Your IP: <strong id="metaIp">—</strong></span>
+      <span class="meta-item">Protocol: <strong id="metaProtocol">—</strong></span>
+    </div>
+
+    <div class="tester-actions">
+      <button id="shareBtn" class="ghost-btn" type="button" hidden>Copy results</button>
+      <button id="againBtn" class="ghost-btn" type="button" hidden>Test again</button>
+    </div>
+  </section>
+
+  <section id="history" class="history" hidden>
+    <h2>Recent tests <button id="clearHistory" class="link-btn" type="button">Clear</button></h2>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th scope="col">When</th><th scope="col">Download</th><th scope="col">Upload</th><th scope="col">Ping</th><th scope="col">Jitter</th></tr>
+        </thead>
+        <tbody id="historyBody"></tbody>
+      </table>
+    </div>
+    <p class="history-note">Stored only in this browser, on this device.</p>
+  </section>
+
+  <section id="how" class="prose">
+    <h2>How the test works</h2>
+    <ol class="steps">
+      <li>
+        <h3>Latency &amp; jitter</h3>
+        <p>A series of tiny requests is timed. The fastest round trip becomes your <strong>ping</strong>; the average variation between consecutive round trips becomes your <strong>jitter</strong>.</p>
+      </li>
+      <li>
+        <h3>Download</h3>
+        <p>Several parallel streams of random, incompressible data are pulled from the server. Bytes are sampled continuously, and the first moments are discarded so TCP slow start doesn't understate the result.</p>
+      </li>
+      <li>
+        <h3>Upload</h3>
+        <p>Random data is pushed back over parallel connections while real upload progress is sampled, then averaged over the steady part of the run.</p>
+      </li>
+    </ol>
+    <p class="fineprint">Speeds are reported in megabits per second (Mbps), where 1 Mbps = 1,000,000 bits per second — the same unit internet plans are sold in. Divide by 8 for megabytes per second.</p>
+  </section>
+
+  <section id="faq" class="prose">
+    <h2>FAQ</h2>
+    <details>
+      <summary>Why is my speed lower than the plan I pay for?</summary>
+      <p>Wi-Fi interference, distance from the router, an older device, VPNs, and other people on the same connection all reduce what a single browser can pull. For the closest match to your plan, test over a wired connection with everything else idle.</p>
+    </details>
+    <details>
+      <summary>What counts as a good result?</summary>
+      <p>Around 5 Mbps handles HD video, 25 Mbps handles 4K, and 100 Mbps comfortably covers a busy household. For calls and gaming, ping under 50 ms and jitter under 10 ms matter far more than raw speed.</p>
+    </details>
+    <details>
+      <summary>Does the browser limit the result?</summary>
+      <p>Yes, on very fast links. A browser tab is bound by JavaScript, HTTP overhead and a limited number of connections, so multi-gigabit lines usually read low here regardless of the server.</p>
+    </details>
+    <details>
+      <summary>Do you keep my data?</summary>
+      <p>No. Results live in your browser's local storage and nowhere else. The server generates random bytes, counts what it receives, and stores nothing.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>SpeedMeter — an open, self-hosted internet speed test.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
