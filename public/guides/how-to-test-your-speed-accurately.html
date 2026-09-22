@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to test your internet speed accurately — {{SITE_NAME}}</title>
+  <meta name="description" content="Speed tests disagree for good reasons. Here is how to run one that means something, and how to read the result.">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta name="color-scheme" content="dark light">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="How to test your internet speed accurately — {{SITE_NAME}}">
+  <meta property="og:description" content="Speed tests disagree for good reasons. Here is how to run one that means something, and how to read the result.">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/site-config.js"></script>
+{{ADSENSE_HEAD}}
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "How to test your internet speed accurately", "description": "Speed tests disagree for good reasons. Here is how to run one that means something, and how to read the result.", "datePublished": "2026-09-22", "dateModified": "2026-09-22", "author": {"@type": "Organization", "name": "{{OPERATOR}}"}, "publisher": {"@type": "Organization", "name": "{{SITE_NAME}}"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "{{CANONICAL}}"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "{{SITE_URL}}/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "{{SITE_URL}}/guides/"}, {"@type": "ListItem", "position": 3, "name": "How to test your internet speed accurately", "item": "{{CANONICAL}}"}]}]}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 27a11 11 0 1 1 11-11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M16 16l7-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="16" cy="16" r="2.5" fill="currentColor"/>
+        </svg>
+        <span>Speed<strong>Meter</strong></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/">Speed test</a>
+        <a href="/guides/">Guides</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch colour theme">
+          <span aria-hidden="true">&#9680;</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+<main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">/</span> <a href="/guides/">Guides</a>
+    </nav>
+    <article class="prose page-prose article">
+      <h1>How to test your internet speed accurately</h1>
+      <p class="page-meta">Updated 22 September 2026 &middot; {{SITE_NAME}}</p>
+
+      <p class="lede">Run three speed tests and you will get three different numbers. That is not a flaw — you are measuring a shared, variable system. Here is how to take a measurement that means something.</p>
+<div class="ad-slot" data-ad-slot="guideTop"></div>
+
+      <h2>Before you test</h2>
+      <ol>
+        <li><strong>Use a cable if you can.</strong> Wi-Fi is usually the bottleneck, so testing over it measures your Wi-Fi, not your connection. If you only ever use Wi-Fi, test both — the difference is the most useful number you will get.</li>
+        <li><strong>Stop other traffic.</strong> Pause downloads, backups and streams, and check nobody else is mid-4K-film. Consoles update games silently in the background.</li>
+        <li><strong>Close other tabs.</strong> The test runs in your browser and competes with everything else in it.</li>
+        <li><strong>Turn off your VPN.</strong> It reroutes traffic through another server and encrypts it, which costs both speed and latency.</li>
+        <li><strong>Test on a capable device.</strong> An old phone may not reach your plan's speed regardless of the connection.</li>
+      </ol>
+
+      <h2>Run more than one test</h2>
+      <p>A single measurement is a snapshot of a system that changes minute to minute. Run three, a minute or two apart, and use the pattern rather than any one figure:</p>
+      <ul>
+        <li><strong>Consistent results</strong> → trust them.</li>
+        <li><strong>Wildly variable</strong> → something is competing with you, or your Wi-Fi is unstable.</li>
+        <li><strong>Each test slower than the last</strong> → possible thermal throttling or a background transfer that started.</li>
+      </ul>
+      <p>SpeedMeter keeps your last ten results in your browser so you can see the pattern without writing anything down.</p>
+
+      <h2>Time of day matters</h2>
+      <p>Most consumer connections share capacity with your neighbourhood. Peak hours — roughly 7pm to 11pm — are when contention shows up.</p>
+      <p>If you suspect congestion, test at 10am and again at 9pm on the same day. A large gap is evidence of an oversubscribed segment, and it is one of the few complaints providers can be held to, because it is specific and reproducible. Keep a log of timestamped results before you call.</p>
+
+      <h2>Why two speed tests disagree</h2>
+      <p>This is the most common question, and the answers are mundane:</p>
+      <ul>
+        <li><strong>Different servers.</strong> A test server 20 km away will outperform one 2,000 km away. Distance costs throughput as well as latency.</li>
+        <li><strong>Different numbers of connections.</strong> Tests using more parallel streams report higher figures. Single-stream tests understate fast or distant links badly.</li>
+        <li><strong>Different handling of ramp-up.</strong> Tests that include TCP slow start in the average read lower than those that discard it.</li>
+        <li><strong>Server capacity.</strong> If the far end is loaded, you measure their limit, not yours.</li>
+        <li><strong>Provider prioritisation.</strong> Some networks historically gave well-known test servers preferential treatment, which flatters those results.</li>
+      </ul>
+      <p>Neither number is lying. They are measuring different paths under different assumptions.</p>
+
+      <h2>Reading the four numbers</h2>
+      <h3>Download</h3>
+      <p>Compare with your plan, and expect 5–10% less from protocol overhead. Over Wi-Fi, expect considerably less. If a wired test reaches roughly 90% of your plan, your connection is working correctly.</p>
+
+      <h3>Upload</h3>
+      <p>On cable and DSL this is a fraction of download and that is normal. On fibre it should be close to symmetrical. Check it against your plan separately — providers rarely advertise it prominently.</p>
+
+      <h3>Ping</h3>
+      <p>Under 50 ms is good for most purposes. Remember that much of it is distance to the server, so a higher figure against a distant server is not itself a fault.</p>
+
+      <h3>Jitter</h3>
+      <p>Under 10 ms is healthy. High jitter with a good ping points at Wi-Fi interference or bufferbloat, both covered in <a href="/guides/ping-jitter-packet-loss">our latency guide</a>.</p>
+
+      <h2>What a browser test cannot tell you</h2>
+      <p>Being straight about the limits:</p>
+      <ul>
+        <li><strong>Multi-gigabit connections will read low.</strong> A browser tab is bound by JavaScript, HTTP overhead and a limited number of connections. Above about 1 Gbps, no browser-based test — including this one — reflects the true capacity. Use a native tool such as <code>iperf3</code>.</li>
+        <li><strong>Latency under load is not measured.</strong> Ping is taken before the transfer, so bufferbloat stays hidden.</li>
+        <li><strong>Packet loss needs more samples</strong> than a short test provides. Use a sustained command-line <code>ping</code>.</li>
+        <li><strong>It measures one path</strong> — from your browser to our server. A different destination may behave differently.</li>
+      </ul>
+
+      <h2>If the result is worse than expected</h2>
+      <ol>
+        <li>Retest with a cable. If that fixes it, see <a href="/guides/why-is-my-wifi-slow">why is my Wi-Fi slow</a>.</li>
+        <li>Retest on another device, to rule that device out.</li>
+        <li>Test at a different time of day, to check for congestion.</li>
+        <li>Try a second speed test service, to rule out our server.</li>
+        <li>If a wired test is consistently well below your plan at all hours across multiple services, collect the timestamped results and contact your provider. Evidence is what gets an engineer sent out.</li>
+      </ol>
+      <p><a href="/">Run a test now</a>, then run two more in the next few minutes. The pattern will tell you more than any single number.</p>
+
+    </article>
+    <div class="ad-slot" data-ad-slot="guideBottom"></div>
+    <section class="related">
+      <h2>Related guides</h2>
+      <ul>
+        <li><a href="/guides/how-much-internet-speed-do-i-need">How much internet speed do I actually need?</a></li>
+        <li><a href="/guides/why-is-my-wifi-slow">Why is my Wi-Fi slow? A diagnostic order that actually works</a></li>
+        <li><a href="/guides/ping-jitter-packet-loss">Ping, jitter and packet loss explained</a></li>
+      </ul>
+    </section>
+    <section class="inline-cta">
+      <h2>Measure your own connection</h2>
+      <p>Numbers in a guide only go so far. Test your line and compare it with what you have just read.</p>
+      <p><a class="cta-link" href="/">Run a free speed test</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/">Speed test</a>
+        <a href="/guides/">Guides</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
+      <p class="footer-legal">&copy; {{YEAR}} {{OPERATOR}}. SpeedMeter is an independent speed test and is not affiliated with any internet service provider.</p>
+    </div>
+  </footer>
+  <script src="/consent.js"></script>
+  <script src="/ads.js"></script>
+</body>
+</html>

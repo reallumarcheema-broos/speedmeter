@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About {{SITE_NAME}} — Who we are and how the test works</title>
+  <meta name="description" content="What SpeedMeter is, who runs it, how it measures your connection, and why its numbers sometimes differ from your provider.">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta name="color-scheme" content="dark light">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="About {{SITE_NAME}} — Who we are and how the test works">
+  <meta property="og:description" content="What SpeedMeter is, who runs it, how it measures your connection, and why its numbers sometimes differ from your provider.">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/site-config.js"></script>
+{{ADSENSE_HEAD}}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 27a11 11 0 1 1 11-11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M16 16l7-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="16" cy="16" r="2.5" fill="currentColor"/>
+        </svg>
+        <span>Speed<strong>Meter</strong></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/">Speed test</a>
+        <a href="/guides/">Guides</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch colour theme">
+          <span aria-hidden="true">&#9680;</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+<main id="main" class="wrap">
+    <article class="prose page-prose">
+      <h1>About {{SITE_NAME}}</h1>
+
+      <p class="lede">{{SITE_NAME}} is a free internet speed test built on one idea: tell people exactly what is being measured, and how, instead of showing a number and leaving them to guess.</p>
+
+      <h2>Why another speed test?</h2>
+      <p>Most speed tests are opaque. They give you a figure with no indication of how many connections were opened, whether the ramp-up was counted, or what the number actually represents. When the result disagrees with what you are paying for, there is no way to tell whether the problem is your Wi-Fi, your provider, or the test itself.</p>
+      <p>We publish the method. Every choice made in the measurement is described on this page and in our <a href="/guides/">guides</a>, so you can judge the result for yourself.</p>
+
+      <h2>How the measurement works</h2>
+      <h3>Ping and jitter</h3>
+      <p>Twelve very small requests are timed in sequence. The <strong>fastest</strong> round trip becomes your ping — the fastest is used rather than the average because it represents the path with the least queuing. <strong>Jitter</strong> is the mean difference between consecutive round trips, which is what makes calls stutter and games feel unpredictable.</p>
+
+      <h3>Download</h3>
+      <p>Four parallel connections pull randomly generated data for ten seconds. Parallel connections matter: a single stream is limited by round-trip time and TCP window size, and on a long-distance link one stream can show a fraction of the real capacity. Real workloads — a browser loading a page, a video player buffering — use many connections, so several is the honest way to measure.</p>
+      <p>The data is random because random data cannot be compressed. If we sent zeros, any compression along the path would give a wildly inflated result.</p>
+
+      <h3>Upload</h3>
+      <p>Three parallel connections push random data back for ten seconds, sampling genuine upload progress as the bytes leave rather than just timing whole requests.</p>
+
+      <h3>Discarding the ramp-up</h3>
+      <p>Connections do not start at full speed. TCP slow start means the first seconds of any transfer are slower than the steady state. We discard the first two seconds of the download stage and the first two and a half of the upload stage, then average what remains. Without that, every result would read low.</p>
+
+      <h2>What we do not do</h2>
+      <p>We do not store your results, require an account, or ask for any personal detail. Your last ten tests live in your own browser and nowhere else. The full detail is in our <a href="/privacy">privacy policy</a>.</p>
+
+      <h2>How the site is funded</h2>
+      <p>{{SITE_NAME}} is free to use and supported by advertising. Running a speed test is unusually expensive to host — every test moves hundreds of megabytes — and ads are what covers that.</p>
+      <p>We deliberately hold ads back while a test is running. An ad loading mid-measurement would compete for the same bandwidth we are trying to measure and would make your result read low. Accuracy comes first.</p>
+
+      <h2>Contact</h2>
+      <p>{{SITE_NAME}} is operated by {{OPERATOR}}. For corrections, questions or feedback, see the <a href="/contact">contact page</a>.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/">Speed test</a>
+        <a href="/guides/">Guides</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
+      <p class="footer-legal">&copy; {{YEAR}} {{OPERATOR}}. SpeedMeter is an independent speed test and is not affiliated with any internet service provider.</p>
+    </div>
+  </footer>
+  <script src="/consent.js"></script>
+  <script src="/ads.js"></script>
+</body>
+</html>

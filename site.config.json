@@ -1,0 +1,17 @@
+{
+  "siteName": "SpeedMeter",
+  "siteUrl": "https://speedmeter.example.com",
+  "tagline": "Test your internet speed",
+  "contactEmail": "hello@speedmeter.example.com",
+  "operator": "SpeedMeter",
+  "operatorLocation": "",
+  "serverName": "SpeedMeter (self-hosted)",
+  "adsense": {
+    "client": "",
+    "slots": {
+      "resultsBanner": "",
+      "guideTop": "",
+      "guideBottom": ""
+    }
+  }
+}

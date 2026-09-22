@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mbps vs MB/s: why your 100 Mbps line downloads at 12 MB/s — {{SITE_NAME}}</title>
+  <meta name="description" content="The unit confusion that makes people think they are being short-changed, and the overheads that eat the rest.">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta name="color-scheme" content="dark light">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="Mbps vs MB/s: why your 100 Mbps line downloads at 12 MB/s — {{SITE_NAME}}">
+  <meta property="og:description" content="The unit confusion that makes people think they are being short-changed, and the overheads that eat the rest.">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/site-config.js"></script>
+{{ADSENSE_HEAD}}
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "Mbps vs MB/s: why your 100 Mbps line downloads at 12 MB/s", "description": "The unit confusion that makes people think they are being short-changed, and the overheads that eat the rest.", "datePublished": "2026-09-22", "dateModified": "2026-09-22", "author": {"@type": "Organization", "name": "{{OPERATOR}}"}, "publisher": {"@type": "Organization", "name": "{{SITE_NAME}}"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "{{CANONICAL}}"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "{{SITE_URL}}/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "{{SITE_URL}}/guides/"}, {"@type": "ListItem", "position": 3, "name": "Mbps vs MB/s: why your 100 Mbps line downloads at 12 MB/s", "item": "{{CANONICAL}}"}]}]}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 27a11 11 0 1 1 11-11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M16 16l7-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="16" cy="16" r="2.5" fill="currentColor"/>
+        </svg>
+        <span>Speed<strong>Meter</strong></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/">Speed test</a>
+        <a href="/guides/">Guides</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch colour theme">
+          <span aria-hidden="true">&#9680;</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+<main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">/</span> <a href="/guides/">Guides</a>
+    </nav>
+    <article class="prose page-prose article">
+      <h1>Mbps vs MB/s: why your 100 Mbps line downloads at 12 MB/s</h1>
+      <p class="page-meta">Updated 22 September 2026 &middot; {{SITE_NAME}}</p>
+
+      <p class="lede">You pay for 100 Mbps. Your browser says the file is downloading at 11.8 MB/s. Nothing is wrong — but the reason is a unit choice made decades ago that has confused people ever since.</p>
+<div class="ad-slot" data-ad-slot="guideTop"></div>
+
+      <h2>Bits and bytes are not the same thing</h2>
+      <p>A <strong>bit</strong> is a single 1 or 0. A <strong>byte</strong> is eight bits. Roughly one text character.</p>
+      <p>Network speeds are measured in bits per second. File sizes and download managers are measured in bytes per second. The abbreviations are almost identical, which is the whole problem:</p>
+      <ul>
+        <li><strong>Mbps</strong> — megabits per second. Lowercase b. Your internet plan.</li>
+        <li><strong>MB/s</strong> — megabytes per second. Uppercase B. Your download progress bar.</li>
+      </ul>
+      <p>One capital letter, a factor of eight.</p>
+
+      <h2>The conversion</h2>
+      <p class="callout">Divide Mbps by 8 to get MB/s. Multiply MB/s by 8 to get Mbps.</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th scope="col">Plan speed</th><th scope="col">Theoretical maximum</th><th scope="col">Realistic download</th></tr></thead>
+          <tbody>
+            <tr><td>10 Mbps</td><td>1.25 MB/s</td><td>~1.1 MB/s</td></tr>
+            <tr><td>25 Mbps</td><td>3.1 MB/s</td><td>~2.8 MB/s</td></tr>
+            <tr><td>50 Mbps</td><td>6.25 MB/s</td><td>~5.7 MB/s</td></tr>
+            <tr><td>100 Mbps</td><td>12.5 MB/s</td><td>~11.5 MB/s</td></tr>
+            <tr><td>500 Mbps</td><td>62.5 MB/s</td><td>~57 MB/s</td></tr>
+            <tr><td>1 Gbps</td><td>125 MB/s</td><td>~112 MB/s</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>So 11.8 MB/s on a 100 Mbps line is not a rip-off. It is 94% of the theoretical maximum — an excellent result.</p>
+
+      <h2>Where the missing few percent goes</h2>
+      <p>The gap between theoretical and realistic is protocol overhead. Your data does not travel alone; it travels wrapped in headers that tell the network where it is going.</p>
+      <p>Each packet carries an Ethernet frame header, an IP header, and a TCP header — roughly 58 bytes of addressing wrapped around a payload of about 1,460 bytes. That alone is about 4%. Add TLS encryption on HTTPS, the acknowledgements travelling back, and occasional retransmissions, and <strong>5–10% overhead is normal and unavoidable</strong>.</p>
+      <p>A speed test that reports a number suspiciously close to your exact plan speed is probably measuring the raw link rather than what you can actually use.</p>
+
+      <h2>The other ambiguity: mega vs mebi</h2>
+      <p>There is a second, smaller discrepancy. Networking uses decimal units, where 1 megabit is exactly 1,000,000 bits. Operating systems have traditionally used binary units, where 1 MB means 1,048,576 bytes — 4.9% larger.</p>
+      <p>This is why a "500 GB" drive shows as 465 GB in Windows. The correct binary terms are mebibyte (MiB) and gibibyte (GiB), and macOS and Linux now use decimal units correctly, but Windows still labels binary units with decimal names. It is a small effect compared to the factor of eight, but it stacks with it.</p>
+
+      <h2>A quick sanity check</h2>
+      <p>To estimate a download time: <strong>file size in GB × 8, divided by your speed in Mbps, gives minutes — roughly.</strong></p>
+      <p>A 60 GB game on a 200 Mbps line: 60 × 8 = 480; 480 ÷ 200 = 2.4 — so about 2.4 minutes per... no: that gives minutes only when you also divide by 60. Let us do it properly.</p>
+      <p>60 GB is 480 gigabits, or 480,000 megabits. At 200 Mbps that is 2,400 seconds — <strong>40 minutes</strong>. The reliable method: convert everything to bits, divide by your speed in bits per second, and you have seconds.</p>
+
+      <h2>Why providers advertise in bits</h2>
+      <p>Partly history — networking has always measured in bits per second, going back to modems, and it is genuinely the right unit for a transmission line. Partly, it must be said, because the number is eight times larger.</p>
+      <p>Whatever the reason, it is now standard worldwide, and every speed test including <a href="/">this one</a> reports in Mbps so you can compare like with like against your plan.</p>
+
+      <h2>Quick reference</h2>
+      <ul>
+        <li>8 bits = 1 byte.</li>
+        <li>Mbps (small b) = megabits = your internet plan.</li>
+        <li>MB/s (capital B) = megabytes = your download speed.</li>
+        <li>Divide by 8 to convert plan speed into download speed.</li>
+        <li>Expect to reach about 90–95% of the theoretical figure.</li>
+      </ul>
+
+    </article>
+    <div class="ad-slot" data-ad-slot="guideBottom"></div>
+    <section class="related">
+      <h2>Related guides</h2>
+      <ul>
+        <li><a href="/guides/how-much-internet-speed-do-i-need">How much internet speed do I actually need?</a></li>
+        <li><a href="/guides/why-is-my-wifi-slow">Why is my Wi-Fi slow? A diagnostic order that actually works</a></li>
+        <li><a href="/guides/ping-jitter-packet-loss">Ping, jitter and packet loss explained</a></li>
+      </ul>
+    </section>
+    <section class="inline-cta">
+      <h2>Measure your own connection</h2>
+      <p>Numbers in a guide only go so far. Test your line and compare it with what you have just read.</p>
+      <p><a class="cta-link" href="/">Run a free speed test</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/">Speed test</a>
+        <a href="/guides/">Guides</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
+      <p class="footer-legal">&copy; {{YEAR}} {{OPERATOR}}. SpeedMeter is an independent speed test and is not affiliated with any internet service provider.</p>
+    </div>
+  </footer>
+  <script src="/consent.js"></script>
+  <script src="/ads.js"></script>
+</body>
+</html>

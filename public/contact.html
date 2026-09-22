@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact {{SITE_NAME}}</title>
+  <meta name="description" content="Get in touch with the SpeedMeter team about results, corrections, privacy requests or advertising.">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta name="color-scheme" content="dark light">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="Contact {{SITE_NAME}}">
+  <meta property="og:description" content="Get in touch with the SpeedMeter team about results, corrections, privacy requests or advertising.">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/site-config.js"></script>
+{{ADSENSE_HEAD}}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 27a11 11 0 1 1 11-11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M16 16l7-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="16" cy="16" r="2.5" fill="currentColor"/>
+        </svg>
+        <span>Speed<strong>Meter</strong></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/">Speed test</a>
+        <a href="/guides/">Guides</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch colour theme">
+          <span aria-hidden="true">&#9680;</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+<main id="main" class="wrap">
+    <article class="prose page-prose">
+      <h1>Contact</h1>
+
+      <p class="lede">{{SITE_NAME}} is operated by {{OPERATOR}}. We read everything that arrives, and we reply to most of it.</p>
+
+      <div class="contact-card">
+        <h2>Email</h2>
+        <p class="contact-email"><a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a></p>
+        <p>Please give us a few working days to respond.</p>
+      </div>
+
+      <h2>What to include</h2>
+      <p>If you are writing about a result that looks wrong, these details let us actually investigate rather than guess:</p>
+      <ul>
+        <li>The four numbers you saw — download, upload, ping and jitter.</li>
+        <li>What you expected, and where that expectation comes from (your plan, another test).</li>
+        <li>Whether you were on Wi-Fi or a cable.</li>
+        <li>Your browser and operating system.</li>
+        <li>Roughly when you ran the test, and from which country.</li>
+      </ul>
+      <p>Before writing, it is worth reading <a href="/guides/how-to-test-your-speed-accurately">how to test your speed accurately</a> — most surprising results are explained there.</p>
+
+      <h2>Privacy requests</h2>
+      <p>To ask about data we hold, use the same address and say "privacy request" in the subject line. Note that we store no accounts and no results, so in practice there is very little to retrieve. See the <a href="/privacy">privacy policy</a> for what that means.</p>
+
+      <h2>Corrections</h2>
+      <p>If something in our <a href="/guides/">guides</a> is wrong or out of date, tell us. Point to the page and what it should say, and we will fix it and note the change.</p>
+
+      <h2>Advertising</h2>
+      <p>Advertising on this site is sold through Google AdSense rather than directly. We cannot take direct placements, and we do not accept paid links or sponsored posts in our guides.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/">Speed test</a>
+        <a href="/guides/">Guides</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
+      <p class="footer-legal">&copy; {{YEAR}} {{OPERATOR}}. SpeedMeter is an independent speed test and is not affiliated with any internet service provider.</p>
+    </div>
+  </footer>
+  <script src="/consent.js"></script>
+  <script src="/ads.js"></script>
+</body>
+</html>

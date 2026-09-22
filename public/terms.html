@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Terms of Use — {{SITE_NAME}}</title>
+  <meta name="description" content="The terms that apply when you use the SpeedMeter internet speed test, including accuracy limitations and acceptable use.">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta name="color-scheme" content="dark light">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="Terms of Use — {{SITE_NAME}}">
+  <meta property="og:description" content="The terms that apply when you use the SpeedMeter internet speed test, including accuracy limitations and acceptable use.">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/site-config.js"></script>
+{{ADSENSE_HEAD}}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 27a11 11 0 1 1 11-11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M16 16l7-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="16" cy="16" r="2.5" fill="currentColor"/>
+        </svg>
+        <span>Speed<strong>Meter</strong></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/">Speed test</a>
+        <a href="/guides/">Guides</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch colour theme">
+          <span aria-hidden="true">&#9680;</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+<main id="main" class="wrap">
+    <article class="prose page-prose">
+      <h1>Terms of Use</h1>
+      <p class="page-meta">Last updated: 22 September 2026</p>
+
+      <p>By using {{SITE_URL}} you agree to these terms. If you do not agree, please do not use the site.</p>
+
+      <h2>What the service is</h2>
+      <p>{{SITE_NAME}} is a free tool that estimates the speed of the connection between your browser and our server. It is provided as-is, for informational purposes, with no guarantee of availability.</p>
+
+      <h2>Accuracy</h2>
+      <p>A speed test measures one path at one moment through one browser tab. The result is an estimate, not a certified measurement. It is affected by your Wi-Fi, your device, your browser, other traffic on your connection, the distance to our server, and the load on that server at the time.</p>
+      <p>In particular, a browser tab cannot usually saturate a multi-gigabit connection, so very fast links tend to read lower here than they really are. Do not rely on results from this site as evidence in a dispute with your internet provider without corroborating them — your provider will generally only accept measurements from their own tools or from a wired reference test.</p>
+
+      <h2>Acceptable use</h2>
+      <p>You may use the speed test as often as you reasonably need. You may not:</p>
+      <ul>
+        <li>run automated, scripted or bulk requests against the test endpoints, or use them as a bandwidth source for anything other than measuring your own connection;</li>
+        <li>attempt to disrupt, overload or gain unauthorised access to the service;</li>
+        <li>interfere with, obscure or artificially interact with advertising shown on the site;</li>
+        <li>scrape, frame or republish the site's content without permission.</li>
+      </ul>
+      <p>We may rate-limit or block traffic that degrades the service for others.</p>
+
+      <h2>Advertising</h2>
+      <p>This site is supported by advertising. Ads are supplied by third parties and their presence is not an endorsement. Any dealings you have with an advertiser are between you and them.</p>
+
+      <h2>Intellectual property</h2>
+      <p>The text, design and code of this site belong to {{OPERATOR}} unless stated otherwise. Trademarks and product names mentioned belong to their respective owners.</p>
+
+      <h2>Links to other sites</h2>
+      <p>Where we link to external sites, we do so because we think they are useful. We do not control them and are not responsible for their content or practices.</p>
+
+      <h2>Disclaimer and liability</h2>
+      <p>The service is provided "as is" and "as available", without warranties of any kind, express or implied. To the fullest extent permitted by law, {{OPERATOR}} is not liable for any indirect or consequential loss, or for any decision you make on the basis of a measurement taken here.</p>
+      <p>Nothing in these terms limits liability that cannot be limited by law.</p>
+
+      <h2>Changes</h2>
+      <p>These terms may be updated; the date above will change when they are. Continued use after a change means you accept the revised terms.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about these terms: <a href="mailto:{{CONTACT_EMAIL}}">{{CONTACT_EMAIL}}</a>.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/">Speed test</a>
+        <a href="/guides/">Guides</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
+      <p class="footer-legal">&copy; {{YEAR}} {{OPERATOR}}. SpeedMeter is an independent speed test and is not affiliated with any internet service provider.</p>
+    </div>
+  </footer>
+  <script src="/consent.js"></script>
+  <script src="/ads.js"></script>
+</body>
+</html>

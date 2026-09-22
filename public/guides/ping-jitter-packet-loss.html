@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ping, jitter and packet loss explained — {{SITE_NAME}}</title>
+  <meta name="description" content="What the three latency numbers mean, what counts as good, and why they matter more than speed for calls and gaming.">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta name="color-scheme" content="dark light">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="Ping, jitter and packet loss explained — {{SITE_NAME}}">
+  <meta property="og:description" content="What the three latency numbers mean, what counts as good, and why they matter more than speed for calls and gaming.">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/site-config.js"></script>
+{{ADSENSE_HEAD}}
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "Ping, jitter and packet loss explained", "description": "What the three latency numbers mean, what counts as good, and why they matter more than speed for calls and gaming.", "datePublished": "2026-09-22", "dateModified": "2026-09-22", "author": {"@type": "Organization", "name": "{{OPERATOR}}"}, "publisher": {"@type": "Organization", "name": "{{SITE_NAME}}"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "{{CANONICAL}}"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "{{SITE_URL}}/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "{{SITE_URL}}/guides/"}, {"@type": "ListItem", "position": 3, "name": "Ping, jitter and packet loss explained", "item": "{{CANONICAL}}"}]}]}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 27a11 11 0 1 1 11-11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M16 16l7-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="16" cy="16" r="2.5" fill="currentColor"/>
+        </svg>
+        <span>Speed<strong>Meter</strong></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/">Speed test</a>
+        <a href="/guides/">Guides</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch colour theme">
+          <span aria-hidden="true">&#9680;</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+<main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">/</span> <a href="/guides/">Guides</a>
+    </nav>
+    <article class="prose page-prose article">
+      <h1>Ping, jitter and packet loss explained</h1>
+      <p class="page-meta">Updated 22 September 2026 &middot; {{SITE_NAME}}</p>
+
+      <p class="lede">Speed gets the headlines, but if calls break up or games feel unfair, speed is almost never the problem. These three numbers are.</p>
+<div class="ad-slot" data-ad-slot="guideTop"></div>
+
+      <h2>Ping: how long a round trip takes</h2>
+      <p>Ping — more precisely, round-trip time — is how long a small packet takes to reach a server and come back, measured in milliseconds. It is a measure of <em>distance and delay</em>, not capacity.</p>
+      <p>The useful analogy: bandwidth is how wide the road is, latency is how long the journey takes. Widening the road does not shorten the trip. This is why a gigabit satellite connection, with 600 ms of latency, feels far worse for everyday use than a 50 Mbps fibre line at 8 ms.</p>
+
+      <h3>What counts as good</h3>
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th scope="col">Ping</th><th scope="col">Verdict</th><th scope="col">What it feels like</th></tr></thead>
+          <tbody>
+            <tr><td>Under 20 ms</td><td>Excellent</td><td>Indistinguishable from local. Competitive gaming is fine.</td></tr>
+            <tr><td>20–50 ms</td><td>Good</td><td>Everything works well. Most fibre lines land here.</td></tr>
+            <tr><td>50–100 ms</td><td>Acceptable</td><td>Calls fine. Fast-paced games feel slightly behind.</td></tr>
+            <tr><td>100–200 ms</td><td>Poor</td><td>Noticeable lag in conversation. Games frustrating.</td></tr>
+            <tr><td>Over 200 ms</td><td>Bad</td><td>People talk over each other. Real-time games unplayable.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Some of your ping is physics and cannot be fixed. Light in fibre covers roughly 200 km per millisecond, and real routes are not straight, so London to New York has a floor around 70 ms round trip no matter what you pay. When a game server is on another continent, distance is your ping.</p>
+
+      <h3>What you can change</h3>
+      <ul>
+        <li><strong>Connection type.</strong> Fibre 5–15 ms, cable 15–30 ms, DSL 20–50 ms, 4G/5G 30–70 ms, geostationary satellite 500–700 ms.</li>
+        <li><strong>Wi-Fi vs cable.</strong> Wi-Fi adds a few milliseconds and, more importantly, makes latency inconsistent.</li>
+        <li><strong>Pick a nearer server.</strong> In games, choose the closest region. Halving the distance halves that part of the delay.</li>
+        <li><strong>Turn off the VPN.</strong> It routes your traffic via somewhere else first, adding the detour to every packet.</li>
+      </ul>
+
+      <h2>Jitter: how much the delay varies</h2>
+      <p>Jitter is the variation between consecutive round trips. If five pings come back at 20, 21, 19, 20 and 21 ms, jitter is about 1 ms and the connection is steady. If they come back at 20, 85, 15, 70 and 25 ms, the average is not far off — but the connection is unusable for a call.</p>
+      <p><strong>For real-time audio and video, jitter matters more than ping.</strong> Voice data must be played back at a constant rate. Packets arriving unevenly have to be held in a buffer and released on schedule; when the variation exceeds what the buffer can absorb, you get the robotic, chopped-up audio everyone recognises.</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th scope="col">Jitter</th><th scope="col">Verdict</th></tr></thead>
+          <tbody>
+            <tr><td>Under 5 ms</td><td>Excellent — calls will be clean</td></tr>
+            <tr><td>5–20 ms</td><td>Fine for most uses</td></tr>
+            <tr><td>20–50 ms</td><td>Audible problems on calls</td></tr>
+            <tr><td>Over 50 ms</td><td>Calls will break up badly</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>What causes it</h3>
+      <ul>
+        <li><strong>Wi-Fi interference</strong> — by far the most common cause in homes. The airwaves are shared, so your packets wait for other transmissions.</li>
+        <li><strong>A congested link</strong>, where packets queue behind other traffic.</li>
+        <li><strong>Bufferbloat</strong>, described below — the big one.</li>
+        <li><strong>Faulty cabling or a dying modem</strong>, which cause retransmissions.</li>
+      </ul>
+
+      <h2>Packet loss: data that never arrives</h2>
+      <p>Packet loss is the percentage of packets that vanish in transit. Some loss is normal and how networks signal congestion, but sustained loss is destructive out of proportion to its size.</p>
+      <p>For downloads, a lost packet must be retransmitted, and TCP interprets loss as congestion and slows down — so <strong>1% packet loss can cut throughput by far more than 1%</strong>. For live video and voice, there is no time to retransmit, so the packet is simply gone: a frozen frame or a dropped syllable.</p>
+      <ul>
+        <li><strong>0%</strong> — healthy.</li>
+        <li><strong>Under 1%</strong> — generally unnoticeable.</li>
+        <li><strong>1–2.5%</strong> — calls degrade, games rubber-band.</li>
+        <li><strong>Over 2.5%</strong> — something is wrong; investigate.</li>
+      </ul>
+      <p>Consistent packet loss on a wired connection usually means a hardware fault — a damaged cable, a failing port, a modem on its way out, or water in an outdoor junction. It is worth reporting to your provider, with a log of when it happens.</p>
+
+      <h2>Bufferbloat: the problem most tests miss</h2>
+      <p>This deserves its own section because it explains a specific, maddening symptom: <em>your connection is fast, tests look great, but the moment someone starts a big upload or download, calls fall apart.</em></p>
+      <p>The cause is oversized buffers in routers and modems. When a link saturates, instead of dropping packets — which would signal the sender to slow down — the device queues them in a large buffer. Your time-sensitive voice packet arrives at the back of a queue holding several seconds of bulk data, and waits.</p>
+      <p>The result is latency that is excellent when idle and catastrophic under load. A line at 15 ms when quiet can hit 1,500 ms while a backup runs. A standard speed test measures ping <em>before</em> the transfer stage, so it reports the good number and never sees the problem.</p>
+      <p><strong>The fix</strong> is Smart Queue Management — <code>fq_codel</code> or <code>cake</code> — which keeps queues short. Look for "Smart Queue", "SQM", "bufferbloat mitigation" or "adaptive QoS" in your router settings; many modern routers have it and ship with it switched off. Where it is not available, manually setting the QoS bandwidth limit to about 90% of your measured speed keeps the queue in your own router, where it can be managed, rather than in your provider's equipment.</p>
+
+      <h2>How SpeedMeter measures the first two</h2>
+      <p>Our test sends twelve small timed requests. <strong>Ping</strong> is the fastest of them — the fastest round trip represents the path with the least queuing, so it is the cleanest estimate of the underlying delay. <strong>Jitter</strong> is the mean difference between consecutive round trips.</p>
+      <p>We report packet loss indirectly: probes that fail are excluded rather than counted as a percentage, because twelve samples is too small a base for a meaningful loss figure. For a proper measurement, run a sustained <code>ping</code> from a command line for a few hundred packets.</p>
+      <p><a href="/">Test your ping and jitter now</a> — and if your speed looks fine but calls do not, bufferbloat is where to look next.</p>
+
+    </article>
+    <div class="ad-slot" data-ad-slot="guideBottom"></div>
+    <section class="related">
+      <h2>Related guides</h2>
+      <ul>
+        <li><a href="/guides/how-much-internet-speed-do-i-need">How much internet speed do I actually need?</a></li>
+        <li><a href="/guides/why-is-my-wifi-slow">Why is my Wi-Fi slow? A diagnostic order that actually works</a></li>
+        <li><a href="/guides/mbps-vs-megabytes">Mbps vs MB/s: why your 100 Mbps line downloads at 12 MB/s</a></li>
+      </ul>
+    </section>
+    <section class="inline-cta">
+      <h2>Measure your own connection</h2>
+      <p>Numbers in a guide only go so far. Test your line and compare it with what you have just read.</p>
+      <p><a class="cta-link" href="/">Run a free speed test</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/">Speed test</a>
+        <a href="/guides/">Guides</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
+      <p class="footer-legal">&copy; {{YEAR}} {{OPERATOR}}. SpeedMeter is an independent speed test and is not affiliated with any internet service provider.</p>
+    </div>
+  </footer>
+  <script src="/consent.js"></script>
+  <script src="/ads.js"></script>
+</body>
+</html>

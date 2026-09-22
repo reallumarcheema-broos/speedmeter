@@ -465,6 +465,10 @@
   async function runTest() {
     if (state.running) return;
 
+    // Tells ads.js to hold any pending ad load: creatives fetched during the
+    // measurement would steal bandwidth from it and depress the result.
+    document.dispatchEvent(new CustomEvent('speedmeter:teststart'));
+
     state.running = true;
     state.abort = new AbortController();
     const { signal } = state.abort;
@@ -530,6 +534,7 @@
     } finally {
       state.running = false;
       state.abort = null;
+      document.dispatchEvent(new CustomEvent('speedmeter:testend'));
       els.startBtn.disabled = false;
       els.startBtn.classList.remove('is-abort');
       els.startBtn.querySelector('.start-btn-text').textContent = 'Test again';

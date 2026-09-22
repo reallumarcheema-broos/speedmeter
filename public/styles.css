@@ -472,3 +472,260 @@ details p { margin: 0.6rem 0 0; font-size: 0.93rem; }
   html { scroll-behavior: auto; }
   * { transition-duration: 1ms !important; }
 }
+
+/* ------------------------------------------------------------- content pages */
+
+.page-head { padding: 2.5rem 0 1rem; }
+.page-head h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); letter-spacing: -0.03em; margin: 0 0 0.5rem; }
+
+.page-prose {
+  max-width: 44rem;
+  margin-inline: auto;
+  padding-top: 2.5rem;
+}
+.page-prose h1 {
+  font-size: clamp(1.8rem, 4.6vw, 2.5rem);
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.6rem;
+}
+.page-prose h2 {
+  font-size: 1.3rem;
+  margin-top: 2.2rem;
+  letter-spacing: -0.02em;
+}
+.page-prose h3 {
+  font-size: 1.05rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+.page-prose p,
+.page-prose li { color: var(--text-dim); }
+.page-prose strong { color: var(--text); }
+.page-prose ul,
+.page-prose ol { padding-left: 1.2rem; }
+.page-prose li { margin-bottom: 0.4rem; }
+.page-prose a { color: var(--accent); }
+.page-prose code {
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.1em 0.38em;
+  font-size: 0.88em;
+}
+.page-prose .table-scroll { margin: 1.1rem 0; }
+
+.lede {
+  font-size: 1.08rem;
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+.page-meta {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-top: 0;
+}
+
+.callout {
+  border-left: 3px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  padding: 0.8rem 1rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--text) !important;
+}
+
+.breadcrumb {
+  padding-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  max-width: 44rem;
+  margin-inline: auto;
+}
+.breadcrumb a { color: var(--text-dim); }
+.breadcrumb a:hover { color: var(--text); }
+.breadcrumb span { margin: 0 0.35rem; }
+
+/* Guide listing */
+.guide-grid {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1rem;
+}
+.guide-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+.guide-card:hover { border-color: color-mix(in srgb, var(--accent) 55%, transparent); transform: translateY(-2px); }
+.guide-card h2,
+.guide-card h3 { margin: 0 0 0.45rem; font-size: 1.05rem; line-height: 1.35; }
+.guide-card a { color: var(--text); text-decoration: none; }
+.guide-card a:hover { color: var(--accent); }
+.guide-card p { margin: 0; color: var(--text-dim); font-size: 0.92rem; }
+.guide-more {
+  display: inline-block;
+  margin-top: 0.7rem;
+  font-size: 0.82rem;
+  color: var(--accent);
+}
+
+.guide-teaser { margin-top: 3rem; }
+.guide-teaser h2 { font-size: 1.45rem; letter-spacing: -0.02em; }
+
+.related {
+  max-width: 44rem;
+  margin: 2.5rem auto 0;
+}
+.related h2 { font-size: 1.1rem; }
+.related ul { padding-left: 1.2rem; }
+.related a { color: var(--accent); }
+
+.inline-cta {
+  max-width: 44rem;
+  margin: 2.5rem auto 0;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-align: center;
+}
+.inline-cta h2 { margin-top: 0; font-size: 1.15rem; }
+.inline-cta p { color: var(--text-dim); }
+
+.cta-link {
+  display: inline-block;
+  margin-top: 0.4rem;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  text-decoration: none;
+  font-weight: 650;
+  border-radius: 999px;
+  padding: 0.7rem 1.75rem;
+}
+.cta-link:hover { filter: brightness(1.05); }
+
+.contact-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+}
+.contact-card h2 { margin-top: 0; }
+.contact-email { font-size: 1.15rem; }
+.contact-email a { color: var(--accent); }
+
+.error-page { text-align: center; padding-top: 4rem; }
+.error-code {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+  line-height: 1;
+}
+.error-page ul { list-style: none; padding: 0; }
+
+/* ------------------------------------------------------------------ ad slots */
+
+/*
+ * An unconfigured or unfilled slot collapses to nothing, so there is never a
+ * blank reserved box in the layout.
+ */
+.ad-slot {
+  margin: 2rem auto 0;
+  max-width: 44rem;
+  text-align: center;
+}
+.ad-slot:not(.is-filled) { display: none; }
+.ad-label {
+  display: block;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
+  margin-bottom: 0.35rem;
+}
+
+/* -------------------------------------------------------------- consent banner */
+
+.consent-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  background: var(--bg-soft);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.28);
+  padding: 1rem;
+}
+.consent-inner {
+  width: min(1060px, 100%);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.consent-text { flex: 1 1 22rem; }
+.consent-text strong { display: block; margin-bottom: 0.2rem; }
+.consent-text p { margin: 0; font-size: 0.87rem; color: var(--text-dim); }
+.consent-text a { color: var(--accent); }
+.consent-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex: 0 0 auto;
+}
+.consent-accept {
+  margin-top: 0;
+  padding: 0.6rem 1.6rem;
+  font-size: 0.95rem;
+}
+body.has-consent-banner .site-footer { padding-bottom: 7rem; }
+
+/* ----------------------------------------------------------------- footer nav */
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.4rem;
+  margin-bottom: 0.8rem;
+}
+.footer-nav a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.88rem;
+}
+.footer-nav a:hover { color: var(--text); }
+.footer-legal { max-width: 40rem; margin-inline: auto; }
+
+.site-nav a[aria-current="page"] { color: var(--text); font-weight: 600; }
+
+@media (max-width: 640px) {
+  /* Keep every nav link reachable on a phone by giving the nav its own row
+     instead of hiding links, which would cost crawlable internal navigation. */
+  .header-inner {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    padding-bottom: 0.6rem;
+  }
+  .site-nav {
+    width: 100%;
+    justify-content: center;
+    gap: 0.85rem;
+  }
+  .site-nav a { display: inline; font-size: 0.82rem; }
+  .theme-toggle { width: 30px; height: 30px; font-size: 0.85rem; }
+  .consent-actions { width: 100%; }
+  .consent-actions button { flex: 1; }
+  .page-prose { padding-top: 1.5rem; }
+}

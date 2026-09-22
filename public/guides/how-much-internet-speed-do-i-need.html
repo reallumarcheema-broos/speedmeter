@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How much internet speed do I actually need? — {{SITE_NAME}}</title>
+  <meta name="description" content="Real numbers for streaming, calls, gaming and working from home — and why most households are paying for far more speed than they use.">
+  <link rel="canonical" href="{{CANONICAL}}">
+  <meta name="color-scheme" content="dark light">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{SITE_NAME}}">
+  <meta property="og:title" content="How much internet speed do I actually need? — {{SITE_NAME}}">
+  <meta property="og:description" content="Real numbers for streaming, calls, gaming and working from home — and why most households are paying for far more speed than they use.">
+  <meta property="og:url" content="{{CANONICAL}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/site-config.js"></script>
+{{ADSENSE_HEAD}}
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "How much internet speed do I actually need?", "description": "Real numbers for streaming, calls, gaming and working from home \u2014 and why most households are paying for far more speed than they use.", "datePublished": "2026-09-22", "dateModified": "2026-09-22", "author": {"@type": "Organization", "name": "{{OPERATOR}}"}, "publisher": {"@type": "Organization", "name": "{{SITE_NAME}}"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "{{CANONICAL}}"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "{{SITE_URL}}/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "{{SITE_URL}}/guides/"}, {"@type": "ListItem", "position": 3, "name": "How much internet speed do I actually need?", "item": "{{CANONICAL}}"}]}]}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16 27a11 11 0 1 1 11-11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M16 16l7-5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="16" cy="16" r="2.5" fill="currentColor"/>
+        </svg>
+        <span>Speed<strong>Meter</strong></span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/">Speed test</a>
+        <a href="/guides/">Guides</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch colour theme">
+          <span aria-hidden="true">&#9680;</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+<main id="main" class="wrap">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> <span aria-hidden="true">/</span> <a href="/guides/">Guides</a>
+    </nav>
+    <article class="prose page-prose article">
+      <h1>How much internet speed do I actually need?</h1>
+      <p class="page-meta">Updated 22 September 2026 &middot; {{SITE_NAME}}</p>
+
+      <p class="lede">Internet plans are sold on one number, and that number is almost always bigger than anything you will use. Here is what each activity actually consumes, and how to work out the plan your household needs.</p>
+<div class="ad-slot" data-ad-slot="guideTop"></div>
+
+      <h2>What individual activities use</h2>
+      <p>These are sustained download figures for one stream, taken from the providers' own published requirements. They are steady-state numbers — a video player will grab more than this in bursts to fill its buffer, then idle.</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th scope="col">Activity</th><th scope="col">Typical use</th><th scope="col">Comfortable with</th></tr></thead>
+          <tbody>
+            <tr><td>Web browsing, email, social media</td><td>1–5 Mbps</td><td>5 Mbps</td></tr>
+            <tr><td>Music streaming (lossless)</td><td>0.3–1.5 Mbps</td><td>2 Mbps</td></tr>
+            <tr><td>Video call, one person (HD)</td><td>1.5–3 Mbps</td><td>4 Mbps</td></tr>
+            <tr><td>Netflix / Disney+ in HD</td><td>5 Mbps</td><td>8 Mbps</td></tr>
+            <tr><td>Netflix / Disney+ in 4K</td><td>15–25 Mbps</td><td>25 Mbps</td></tr>
+            <tr><td>YouTube 4K at 60fps</td><td>20–35 Mbps</td><td>40 Mbps</td></tr>
+            <tr><td>Online gaming (in play)</td><td>0.5–3 Mbps</td><td>5 Mbps</td></tr>
+            <tr><td>Game downloads</td><td>as much as available</td><td>—</td></tr>
+            <tr><td>Cloud backup / large uploads</td><td>as much as available</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Two things stand out. First, <strong>gaming barely uses any bandwidth</strong> while you are playing — it is latency-sensitive, not speed-sensitive, which is a different problem covered in <a href="/guides/ping-jitter-packet-loss">ping, jitter and packet loss</a>. Second, <strong>4K video is the single heaviest routine activity</strong> in most homes.</p>
+
+      <h2>Sizing a household</h2>
+      <p>The naive method is to add up every device you own. That over-buys badly, because people do not all stream 4K simultaneously. A better rule: <strong>take your two heaviest simultaneous activities, add them, then double the total for headroom.</strong></p>
+
+      <p>Worked examples:</p>
+      <ul>
+        <li><strong>One or two people, HD streaming, some browsing.</strong> Heaviest pair: 8 + 5 = 13 Mbps. Doubled: <strong>~25 Mbps</strong>.</li>
+        <li><strong>Family of four, one 4K TV, someone on a video call, kids on tablets.</strong> Heaviest pair: 25 + 4 = 29 Mbps. Doubled: <strong>~60 Mbps</strong>.</li>
+        <li><strong>Two people working from home, 4K in the evening, a console that downloads big games.</strong> Heaviest pair: 25 + 25 = 50 Mbps. Doubled: <strong>~100 Mbps</strong>.</li>
+        <li><strong>Shared house, five or more people, several 4K streams at once.</strong> <strong>200–300 Mbps</strong> is genuinely useful here.</li>
+      </ul>
+
+      <p>Beyond roughly 300 Mbps, extra download speed stops changing how the internet feels. It changes how fast large files arrive — a 60 GB game download is 27 minutes at 300 Mbps and 8 minutes at 1 Gbps — and nothing else. If you do not regularly move files that large, gigabit is buying you a faster progress bar.</p>
+
+      <h2>Upload matters more than the marketing suggests</h2>
+      <p>Providers advertise download speed because it is the bigger number. But upload is what carries your side of a video call, your cloud backups, your photos syncing, and everything you send to a shared drive.</p>
+      <p>On cable and older DSL connections, upload is a small fraction of download — a 200 Mbps cable plan might give you 10–20 Mbps up. That is usually adequate, but it is the first thing to saturate. A single large backup running in the background can make everyone's video calls stutter, because the acknowledgements that keep downloads flowing are stuck behind your upload queue.</p>
+      <p>Fibre connections are typically symmetrical, or close to it. If you work from home, upload capacity and a symmetrical connection are worth more than another few hundred Mbps down.</p>
+
+      <h3>Guideline upload figures</h3>
+      <ul>
+        <li><strong>3 Mbps</strong> — one HD video call, comfortably.</li>
+        <li><strong>10 Mbps</strong> — several calls, plus background photo sync.</li>
+        <li><strong>25 Mbps+</strong> — regular large uploads, video editing to the cloud, streaming to Twitch or YouTube.</li>
+      </ul>
+
+      <h2>Why faster plans often do not feel faster</h2>
+      <p>People upgrade, notice no difference, and conclude they were sold a lie. Usually they were not — the bottleneck simply was not their plan. Common culprits:</p>
+      <ul>
+        <li><strong>Wi-Fi.</strong> An older router or a weak signal will cap you long before your plan does. This is the number one cause by a wide margin, and it is covered in <a href="/guides/why-is-my-wifi-slow">why is my Wi-Fi slow</a>.</li>
+        <li><strong>Latency, not bandwidth.</strong> Pages feel slow because of round trips, not throughput. A 1 Gbps satellite connection with 600 ms latency feels dreadful.</li>
+        <li><strong>The server on the other end.</strong> A download runs at whatever the source will give you. If a site caps each connection at 5 MB/s, your gigabit line changes nothing.</li>
+        <li><strong>Your device.</strong> Old phones, laptops with 2.4 GHz-only Wi-Fi, and cheap USB adapters all have their own ceilings.</li>
+      </ul>
+
+      <h2>A sensible way to decide</h2>
+      <ol>
+        <li><a href="/">Run a speed test</a> on a wired connection if you can, to see what you are getting now.</li>
+        <li>Work out your realistic heaviest pair of activities and double it.</li>
+        <li>If what you are getting already exceeds that figure and the internet still feels slow, the plan is not your problem — fix the Wi-Fi or check your latency first.</li>
+        <li>If you work from home, check the upload number before the download one.</li>
+      </ol>
+      <p>Upgrading a plan that is already fast enough is the most common wasted spend in home internet. Measure before you buy.</p>
+
+    </article>
+    <div class="ad-slot" data-ad-slot="guideBottom"></div>
+    <section class="related">
+      <h2>Related guides</h2>
+      <ul>
+        <li><a href="/guides/why-is-my-wifi-slow">Why is my Wi-Fi slow? A diagnostic order that actually works</a></li>
+        <li><a href="/guides/ping-jitter-packet-loss">Ping, jitter and packet loss explained</a></li>
+        <li><a href="/guides/mbps-vs-megabytes">Mbps vs MB/s: why your 100 Mbps line downloads at 12 MB/s</a></li>
+      </ul>
+    </section>
+    <section class="inline-cta">
+      <h2>Measure your own connection</h2>
+      <p>Numbers in a guide only go so far. Test your line and compare it with what you have just read.</p>
+      <p><a class="cta-link" href="/">Run a free speed test</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/">Speed test</a>
+        <a href="/guides/">Guides</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+      </nav>
+      <p class="footer-legal">&copy; {{YEAR}} {{OPERATOR}}. SpeedMeter is an independent speed test and is not affiliated with any internet service provider.</p>
+    </div>
+  </footer>
+  <script src="/consent.js"></script>
+  <script src="/ads.js"></script>
+</body>
+</html>
