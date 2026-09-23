@@ -20,52 +20,10 @@ const crypto = require('crypto');
 const PORT = Number(process.env.PORT) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
 const PUBLIC_DIR = path.join(__dirname, 'public');
-const CONFIG_PATH = process.env.SITE_CONFIG || path.join(__dirname, 'site.config.json');
+const site = require('./lib/site.js');
 
-const DEFAULT_CONFIG = {
-  siteName: 'SpeedMeter',
-  siteUrl: 'http://localhost:3000',
-  tagline: 'Test your internet speed',
-  contactEmail: '',
-  operator: 'SpeedMeter',
-  operatorLocation: '',
-  serverName: 'SpeedMeter (self-hosted)',
-  adsense: { client: '', slots: {} },
-};
-
-/**
- * Site settings come from site.config.json so the publisher id, canonical
- * host and contact address live in one place instead of being copied into
- * every page. Environment variables win, which keeps deployments flexible.
- */
-function loadConfig() {
-  let fileConfig = {};
-  try {
-    fileConfig = JSON.parse(fs.readFileSync(CONFIG_PATH, 'utf8'));
-  } catch {
-    // No config file is fine; the defaults keep the site usable locally.
-  }
-
-  const config = { ...DEFAULT_CONFIG, ...fileConfig };
-  config.adsense = { ...DEFAULT_CONFIG.adsense, ...(fileConfig.adsense || {}) };
-  config.adsense.slots = { ...(fileConfig.adsense && fileConfig.adsense.slots) };
-
-  if (process.env.SITE_URL) config.siteUrl = process.env.SITE_URL;
-  if (process.env.SITE_NAME) config.siteName = process.env.SITE_NAME;
-  if (process.env.CONTACT_EMAIL) config.contactEmail = process.env.CONTACT_EMAIL;
-  if (process.env.ADSENSE_CLIENT) config.adsense.client = process.env.ADSENSE_CLIENT;
-  if (process.env.SPEEDMETER_SERVER_NAME) config.serverName = process.env.SPEEDMETER_SERVER_NAME;
-
-  config.siteUrl = String(config.siteUrl || '').replace(/\/$/, '');
-  return config;
-}
-
-const CONFIG = loadConfig();
-
-/** A publisher id is required before any ad code or ads.txt is emitted. */
-const ADSENSE_CLIENT = /^ca-pub-\d{10,20}$/.test(CONFIG.adsense.client || '')
-  ? CONFIG.adsense.client
-  : '';
+const CONFIG = site.loadConfig();
+const ADSENSE_CLIENT = site.adsenseClient(CONFIG);
 
 const MAX_DOWNLOAD_BYTES = 1024 * 1024 * 1024; // 1 GiB per request
 const MAX_UPLOAD_BYTES = 256 * 1024 * 1024; // 256 MiB per request
@@ -223,65 +181,6 @@ function handleInfo(req, res) {
   });
 }
 
-/** The AdSense loader plus Consent Mode defaults, or nothing when unconfigured. */
-function adsenseHead() {
-  if (!ADSENSE_CLIENT) return '';
-  return [
-    '<script>',
-    'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}',
-    // Default to denied everywhere, so no personalised ad cookie is set before
-    // the visitor has answered the consent banner.
-    "gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',",
-    "ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});",
-    '</script>',
-    `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}" crossorigin="anonymous"></script>`,
-  ].join('\n');
-}
-
-function canonicalFor(pathname) {
-  const clean = pathname.replace(/index\.html$/, '').replace(/\.html$/, '');
-  const suffix = clean === '/' ? '' : clean;
-  return `${CONFIG.siteUrl}${suffix}`;
-}
-
-/**
- * Fills the placeholders shared by every page. Pages stay plain static HTML —
- * only the handful of values that depend on deployment are substituted here.
- */
-function renderHtml(html, pathname) {
-  const email = CONFIG.contactEmail || '';
-  return html
-    .replaceAll('{{ADSENSE_HEAD}}', adsenseHead())
-    .replaceAll('{{CANONICAL}}', escapeHtml(canonicalFor(pathname)))
-    .replaceAll('{{SITE_URL}}', escapeHtml(CONFIG.siteUrl))
-    .replaceAll('{{SITE_NAME}}', escapeHtml(CONFIG.siteName))
-    .replaceAll('{{OPERATOR}}', escapeHtml(CONFIG.operator || CONFIG.siteName))
-    .replaceAll('{{CONTACT_EMAIL}}', escapeHtml(email))
-    .replaceAll('{{YEAR}}', String(new Date().getFullYear()));
-}
-
-function escapeHtml(value) {
-  return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
-
-/** Lists every page as a clean URL, used for the sitemap. */
-function listPages(dir = PUBLIC_DIR, prefix = '') {
-  const pages = [];
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (entry.name.startsWith('.')) continue;
-    if (entry.isDirectory()) {
-      pages.push(...listPages(path.join(dir, entry.name), `${prefix}/${entry.name}`));
-    } else if (entry.name.endsWith('.html') && entry.name !== '404.html') {
-      pages.push(entry.name === 'index.html' ? `${prefix}/` : `${prefix}/${entry.name.slice(0, -5)}`);
-    }
-  }
-  return pages;
-}
-
 function sendText(res, status, body, type = 'text/plain; charset=utf-8') {
   res.writeHead(status, {
     'Content-Type': type,
@@ -292,53 +191,25 @@ function sendText(res, status, body, type = 'text/plain; charset=utf-8') {
 }
 
 function handleRobots(res) {
-  const lines = ['User-agent: *', 'Allow: /', 'Disallow: /api/', ''];
-  if (CONFIG.siteUrl) lines.push(`Sitemap: ${CONFIG.siteUrl}/sitemap.xml`);
-  sendText(res, 200, `${lines.join('\n')}\n`);
+  sendText(res, 200, site.robotsTxt(CONFIG));
 }
 
 function handleSitemap(res) {
-  const today = new Date().toISOString().slice(0, 10);
-  const urls = listPages()
-    .sort()
-    .map((page) => {
-      const loc = escapeHtml(`${CONFIG.siteUrl}${page === '/' ? '' : page}`);
-      const priority = page === '/' ? '1.0' : '0.7';
-      return `  <url><loc>${loc}${page === '/' ? '/' : ''}</loc><lastmod>${today}</lastmod><priority>${priority}</priority></url>`;
-    });
-  const xml = [
-    '<?xml version="1.0" encoding="UTF-8"?>',
-    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
-    ...urls,
-    '</urlset>',
-    '',
-  ].join('\n');
+  const xml = site.sitemapXml(CONFIG, site.listPages(PUBLIC_DIR));
   sendText(res, 200, xml, 'application/xml; charset=utf-8');
 }
 
-/**
- * ads.txt is only served once a real publisher id is configured. Publishing a
- * placeholder would mark every legitimate buyer as unauthorised and stop the
- * ads earning anything, so its absence is the safe default.
- */
 function handleAdsTxt(res) {
-  if (!ADSENSE_CLIENT) {
+  const body = site.adsTxt(ADSENSE_CLIENT);
+  if (!body) {
     sendText(res, 404, 'ads.txt is not configured. Set adsense.client in site.config.json.\n');
     return;
   }
-  const pubId = ADSENSE_CLIENT.replace(/^ca-/, '');
-  sendText(res, 200, `google.com, ${pubId}, DIRECT, f08c47fec0942fa0\n`);
+  sendText(res, 200, body);
 }
 
-/** Exposes the public half of the site config to the browser. */
 function handleSiteConfig(res) {
-  const publicConfig = {
-    siteName: CONFIG.siteName,
-    siteUrl: CONFIG.siteUrl,
-    contactEmail: CONFIG.contactEmail,
-    adsense: { client: ADSENSE_CLIENT, slots: CONFIG.adsense.slots || {} },
-  };
-  const body = `window.SPEEDMETER_SITE=${JSON.stringify(publicConfig)};\n`;
+  const body = site.siteConfigJs(CONFIG);
   res.writeHead(200, {
     'Content-Type': 'text/javascript; charset=utf-8',
     'Content-Length': Buffer.byteLength(body),
@@ -354,7 +225,7 @@ function sendNotFound(req, res) {
       sendText(res, 404, 'Not found');
       return;
     }
-    const body = renderHtml(html, '/404');
+    const body = site.renderHtml(CONFIG, html, '/404');
     res.writeHead(404, {
       'Content-Type': 'text/html; charset=utf-8',
       'Content-Length': Buffer.byteLength(body),
@@ -411,7 +282,7 @@ function serveStatic(req, res, url) {
         sendNotFound(req, res);
         return;
       }
-      const body = renderHtml(html, url.pathname);
+      const body = site.renderHtml(CONFIG, html, url.pathname);
       res.writeHead(200, {
         'Content-Type': type,
         'Content-Length': Buffer.byteLength(body),

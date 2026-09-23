@@ -49,6 +49,18 @@ sitemap are all generated from it.
 terms and the footer. A privacy policy that still says `example.com` is the
 fastest way to fail an AdSense review.
 
+## Two ways to run it
+
+| | How pages are rendered | Backend |
+| --- | --- | --- |
+| **Self-hosted** (`node server.js`) | at request time | the same process |
+| **Static host** (Vercel, Netlify, CDN) | `npm run build` into `dist/` | the functions in `api/` |
+
+Both share `lib/site.js`, so a page renders identically either way — there is a
+test that asserts the output is byte-identical. See
+[DEPLOY.md](DEPLOY.md#deploying-to-vercel) for the Vercel path, and note the
+bandwidth warning there before sending real traffic at it.
+
 ## Run it
 
 ```bash
@@ -78,10 +90,16 @@ npm start
 Environment variables override `site.config.json`, so one image can serve
 staging and production.
 
+### Build the static site
+
+```bash
+npm run build     # renders public/ -> dist/
+```
+
 ### Tests
 
 ```bash
-npm test
+npm test          # 36 tests: server, serverless functions, static build
 ```
 
 ## Monetisation

@@ -57,11 +57,12 @@
       <p>Twelve very small requests are timed in sequence. The <strong>fastest</strong> round trip becomes your ping — the fastest is used rather than the average because it represents the path with the least queuing. <strong>Jitter</strong> is the mean difference between consecutive round trips, which is what makes calls stutter and games feel unpredictable.</p>
 
       <h3>Download</h3>
-      <p>Four parallel connections pull randomly generated data for ten seconds. Parallel connections matter: a single stream is limited by round-trip time and TCP window size, and on a long-distance link one stream can show a fraction of the real capacity. Real workloads — a browser loading a page, a video player buffering — use many connections, so several is the honest way to measure.</p>
+      <p>Several parallel connections pull randomly generated data for ten seconds. Parallel connections matter: a single stream is limited by round-trip time and TCP window size, and on a long-distance link one stream can show a fraction of the real capacity. Real workloads — a browser loading a page, a video player buffering — use many connections, so several is the honest way to measure.</p>
       <p>The data is random because random data cannot be compressed. If we sent zeros, any compression along the path would give a wildly inflated result.</p>
 
       <h3>Upload</h3>
-      <p>Three parallel connections push random data back for ten seconds, sampling genuine upload progress as the bytes leave rather than just timing whole requests.</p>
+      <p>Several parallel connections push random data back for ten seconds, sampling genuine upload progress as the bytes leave rather than just timing whole requests.</p>
+      <p>The exact number of connections, and how much each one asks for, depends on the backend. A server with no per-request limit is best served by a few large transfers; a serverless host caps each request at a few megabytes, so the test uses more connections and more of them. The client asks the server what it can handle and sizes the run accordingly.</p>
 
       <h3>Discarding the ramp-up</h3>
       <p>Connections do not start at full speed. TCP slow start means the first seconds of any transfer are slower than the steady state. We discard the first two seconds of the download stage and the first two and a half of the upload stage, then average what remains. Without that, every result would read low.</p>

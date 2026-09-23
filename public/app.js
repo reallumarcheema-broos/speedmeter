@@ -9,13 +9,21 @@
       streams: 4,
       durationMs: 10000,
       warmupMs: 2000,
-      requestBytes: 128 * 1024 * 1024,
+      // What we would ask for given a backend with no per-request cap. The
+      // real size is the smaller of this and the limit /api/info reports.
+      preferredRequestBytes: 64 * 1024 * 1024,
     },
     upload: {
       streams: 3,
       durationMs: 10000,
       warmupMs: 2500,
-      blobBytes: 8 * 1024 * 1024,
+      preferredBlobBytes: 8 * 1024 * 1024,
+    },
+    // Used only if /api/info could not be read. Small enough to work on a
+    // serverless host, where request and response bodies are tightly capped.
+    fallbackLimits: {
+      maxDownloadBytes: 4 * 1024 * 1024,
+      maxUploadBytes: 3 * 1024 * 1024,
     },
     sampleIntervalMs: 100,
     displayWindowMs: 700,
@@ -63,7 +71,35 @@
     running: false,
     abort: null,
     results: null,
+    limits: null,
   };
+
+  /**
+   * Sizes the transfers to whatever the backend can actually serve.
+   *
+   * A self-hosted server streams as much as we ask for, so few large requests
+   * are ideal. A serverless platform caps each request at a few megabytes, so
+   * the same stage has to be made of many small ones — and because every
+   * request boundary is a brief gap in the flow, more connections run in
+   * parallel to keep the link saturated.
+   */
+  function transferPlan() {
+    const limits = state.limits || CONFIG.fallbackLimits;
+    const requestBytes = Math.min(
+      CONFIG.download.preferredRequestBytes,
+      limits.maxDownloadBytes || CONFIG.fallbackLimits.maxDownloadBytes,
+    );
+    const blobBytes = Math.min(
+      CONFIG.upload.preferredBlobBytes,
+      limits.maxUploadBytes || CONFIG.fallbackLimits.maxUploadBytes,
+    );
+    return {
+      requestBytes,
+      blobBytes,
+      downloadStreams: requestBytes < 16 * 1024 * 1024 ? 8 : CONFIG.download.streams,
+      uploadStreams: blobBytes < 4 * 1024 * 1024 ? 6 : CONFIG.upload.streams,
+    };
+  }
 
   /* ---------------------------------------------------------------- utils */
 
@@ -160,6 +196,7 @@
   async function loadServerInfo() {
     try {
       const info = await fetchJson('/api/info');
+      if (info.limits) state.limits = info.limits;
       els.metaServer.textContent = info.server || '—';
       els.metaIp.textContent = info.ip || '—';
       els.metaProtocol.textContent = info.protocol || '—';
@@ -302,8 +339,9 @@
 
   /* -------------------------------------------------------- download test */
 
-  async function measureDownload(signal) {
-    const { streams, durationMs, warmupMs, requestBytes } = CONFIG.download;
+  async function measureDownload(signal, plan) {
+    const { durationMs, warmupMs } = CONFIG.download;
+    const { requestBytes, downloadStreams: streams } = plan;
     const meter = createMeter({ durationMs, warmupMs, onLive: (mbps) => gauge.set(mbps) });
     const controller = new AbortController();
     const stageSignal = anySignal([signal, controller.signal]);
@@ -359,8 +397,9 @@
     return new Blob([buffer], { type: 'application/octet-stream' });
   }
 
-  async function measureUpload(signal) {
-    const { streams, durationMs, warmupMs, blobBytes } = CONFIG.upload;
+  async function measureUpload(signal, plan) {
+    const { durationMs, warmupMs } = CONFIG.upload;
+    const { blobBytes, uploadStreams: streams } = plan;
     const meter = createMeter({ durationMs, warmupMs, onLive: (mbps) => gauge.set(mbps) });
     const payload = makeRandomBlob(blobBytes);
     const active = new Set();
@@ -479,7 +518,9 @@
     els.startBtn.querySelector('.start-btn-text').textContent = 'Stop';
 
     try {
-      loadServerInfo();
+      // Awaited: the reported limits decide how the transfer stages are sized.
+      await loadServerInfo();
+      const plan = transferPlan();
 
       setPhase('Ping');
       markActive('ping');
@@ -490,8 +531,8 @@
 
       setPhase('Download');
       markActive('download');
-      setProgress(`Measuring download over ${CONFIG.download.streams} connections…`);
-      const download = await measureDownload(signal);
+      setProgress(`Measuring download over ${plan.downloadStreams} connections…`);
+      const download = await measureDownload(signal, plan);
       els.download.textContent = formatSpeed(download.mbps);
       gauge.set(download.mbps);
 
@@ -499,9 +540,9 @@
 
       setPhase('Upload');
       markActive('upload');
-      setProgress(`Measuring upload over ${CONFIG.upload.streams} connections…`);
+      setProgress(`Measuring upload over ${plan.uploadStreams} connections…`);
       gauge.set(0);
-      const upload = await measureUpload(signal);
+      const upload = await measureUpload(signal, plan);
       els.upload.textContent = formatSpeed(upload.mbps);
       gauge.set(upload.mbps);
 

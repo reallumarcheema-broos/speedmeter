@@ -48,6 +48,74 @@ You can use Cloudflare for DNS, but **do not proxy the site through it**
 - Pushing large volumes of non-HTML data through their CDN is against the
   terms of the free plan.
 
+
+---
+
+## Deploying to Vercel
+
+The repo supports Vercel out of the box: `vercel.json` builds the static pages
+and the `api/` folder becomes four serverless functions.
+
+### Setup
+
+1. Import the repo in Vercel. Framework preset **Other** — `vercel.json`
+   overrides the build command and output directory anyway.
+2. Add environment variables under *Settings → Environment Variables*:
+
+   | Variable | Value |
+   | --- | --- |
+   | `SITE_URL` | `https://your-domain.com` (optional — falls back to your Vercel production domain) |
+   | `CONTACT_EMAIL` | the address shown on the legal pages |
+   | `SITE_NAME`, `ADSENSE_CLIENT` | optional overrides |
+
+3. Deploy. `node build.js` renders `public/` into `dist/`, and `/api/ping`,
+   `/api/download`, `/api/upload` and `/api/info` are deployed as functions.
+
+### What is different from self-hosting
+
+`server.js` substitutes the page placeholders at request time. A static host
+cannot, so **`build.js` does it ahead of time** — this is why a Vercel
+deployment that just serves `public/` shows raw `{{SITE_NAME}}` text and has no
+working API. Both paths share `lib/site.js`, and a test asserts they produce
+byte-identical output.
+
+The functions are also capped far below the self-hosted server:
+
+| | Self-hosted | Vercel |
+| --- | --- | --- |
+| Download per request | 1 GiB | 4 MiB |
+| Upload per request | 256 MiB | 3 MiB |
+| Download connections | 4 | 8 |
+| Upload connections | 3 | 6 |
+
+Vercel's serverless request body limit is 4.5 MB, and a buffered response is
+subject to a similar cap. Rather than hardcoding this, `/api/info` reports the
+limits and the client sizes its requests from them — so the same frontend runs
+against either backend. Because each request is small, the client opens more
+connections in parallel to keep the link saturated between request boundaries.
+
+### The cost warning, concretely
+
+**Vercel Hobby includes 100 GB of bandwidth a month.** One test moves roughly
+250 MB at 100 Mbps. That is about **400 tests a month** before you are over the
+limit — and a speed test that nobody runs earns nothing.
+
+A test also costs roughly 85 function invocations on a 100 Mbps line, and
+several hundred on a fast one, because each request is only a few megabytes.
+
+Vercel is fine for **verifying the site works and getting through AdSense
+review**. It is the wrong shape for a speed test with real traffic. When you
+have visitors, move the backend to a VPS with flat-rate bandwidth (see the
+table at the top of this guide) — you can keep the frontend on Vercel and point
+it at that server with `?api=https://api.your-domain.com`, or move the whole
+thing.
+
+### Accuracy on Vercel
+
+Results will read lower than the same connection measured against a dedicated
+server: cold starts, per-request caps and the gaps between many small requests
+all cost throughput. Treat Vercel numbers as indicative.
+
 ---
 
 ## 2. Get the server running
