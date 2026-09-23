@@ -1,0 +1,29 @@
+# Caddy reverse proxy for SpeedMeter. Caddy obtains and renews TLS
+# certificates automatically — replace the domain and you are done.
+#
+#   sudo cp deploy/Caddyfile /etc/caddy/Caddyfile
+#   sudo systemctl reload caddy
+
+speedmeter.example.com {
+	encode gzip zstd
+
+	# The measurement endpoints must not be buffered or compressed.
+	# Buffering makes the browser measure Caddy instead of the network, and
+	# the payload is random so compression cannot help anyway.
+	@api path /api/*
+	handle @api {
+		reverse_proxy 127.0.0.1:3000 {
+			# -1 disables response buffering entirely.
+			flush_interval -1
+		}
+	}
+
+	handle {
+		reverse_proxy 127.0.0.1:3000
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Frame-Options "SAMEORIGIN"
+	}
+}

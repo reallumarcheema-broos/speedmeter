@@ -1,0 +1,33 @@
+# SpeedMeter as a systemd service.
+#   sudo cp deploy/speedmeter.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now speedmeter
+
+[Unit]
+Description=SpeedMeter internet speed test
+After=network.target
+
+[Service]
+Type=simple
+User=speedmeter
+Group=speedmeter
+WorkingDirectory=/opt/speedmeter
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=3
+
+# Listen on loopback only: the reverse proxy is the public entry point.
+Environment=NODE_ENV=production
+Environment=HOST=127.0.0.1
+Environment=PORT=3000
+
+# The app writes nothing to disk, so it can run fully read-only.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target

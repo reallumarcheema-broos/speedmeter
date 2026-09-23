@@ -205,6 +205,10 @@ https://your-static-host/?api=https://speedmeter.example.com
 
 ## Deploying
 
+**[DEPLOY.md](DEPLOY.md) is the full walkthrough** — hosting choice, systemd,
+TLS, Google Search Console and the AdSense application. Ready-made configs are
+in `deploy/`.
+
 The server is a plain Node HTTP server, so anything that runs Node works.
 Behind a reverse proxy, two things matter:
 
