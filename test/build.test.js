@@ -110,3 +110,24 @@ test('the built pages match what server.js renders at request time', async () =>
   assert.strictEqual(built, rendered);
   fs.rmSync(out, { recursive: true, force: true });
 });
+
+test('a search engine verification file is served verbatim but kept out of the sitemap', () => {
+  // Google hands you googleXXXX.html containing one line of text. It has to be
+  // reachable at the site root byte-for-byte, but it is not a page: listing it
+  // in the sitemap asks crawlers to index the ownership token.
+  const token = 'google1a2b3c4d5e6f7890.html';
+  const body = `google-site-verification: ${token}`;
+  const src = path.join(ROOT, 'public', token);
+  fs.writeFileSync(src, body);
+
+  try {
+    const out = runBuild();
+    assert.strictEqual(fs.readFileSync(path.join(out, token), 'utf8'), body,
+      'verification file must be copied unchanged');
+    assert.ok(!fs.readFileSync(path.join(out, 'sitemap.xml'), 'utf8').includes('google1a2b'),
+      'verification file must not appear in the sitemap');
+    fs.rmSync(out, { recursive: true, force: true });
+  } finally {
+    fs.rmSync(src, { force: true });
+  }
+});
